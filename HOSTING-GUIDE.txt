@@ -1,0 +1,34 @@
+PUT YOUR WEBSITE ONLINE (free tier) - about 20 minutes
+=======================================================
+Free plans change over time, so check each site's current free plan.
+
+STEP 1 - Put the code on GitHub
+  1. Create an account at github.com and click "New repository" (name: college-events).
+  2. Click "uploading an existing file" and drag in ALL files from this folder
+     EXCEPT .env and node_modules (the .gitignore already protects them).
+  3. Click "Commit changes".
+
+STEP 2 - Create an online MySQL database (Aiven)
+  1. Sign up at aiven.io and create a free MySQL service.
+  2. When it is running, copy: Host, Port, User, Password, Database name.
+  3. Keep this page open, you need these values in step 3.
+
+STEP 3 - Host the website (Render)
+  1. Sign up at render.com with your GitHub account.
+  2. New + -> Web Service -> pick your college-events repository.
+  3. Settings:  Runtime: Node   Build Command: npm install   Start Command: npm start
+  4. Under "Environment Variables" add (use values from step 2):
+        DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
+        DB_SSL        = true
+        STUDENT_EMAIL_KEYWORD = viva
+        ADMIN_EMAIL   = admin@viva.edu
+        ADMIN_PASSWORD= (a STRONG password)
+        JWT_SECRET    = (any long random text)
+  5. Click "Create Web Service". After a few minutes you get a link like
+        https://college-events.onrender.com
+     Send that link to anyone - it opens in Chrome on any phone or computer.
+
+NOTES
+  - Free Render sites go to sleep when unused; the first visit may take ~30 seconds.
+  - Never upload your .env file anywhere.
+  - Admin login on the live site uses the ADMIN_EMAIL / ADMIN_PASSWORD you typed in Render.

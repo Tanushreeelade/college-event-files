@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIVA Campus Events</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#" onclick="go('home');return false">🎓 Campus<span>Events</span></a>
+  <nav id="navLinks"></nav>
+</header>
+
+<div id="toast" class="toast"></div>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="view">
+    <div class="hero">
+      <h1>Discover. Register. <span>Celebrate.</span></h1>
+      <p>One place for every college event. Log in with your college email to register.</p>
+      <div id="heroBtns"></div>
+    </div>
+    <h2 class="title">Upcoming Events</h2>
+    <div id="eventGrid" class="grid"></div>
+
+    <h2 class="title" id="contact">Contact Us</h2>
+    <form class="card form narrow" onsubmit="sendContact(event)">
+      <input id="cName" placeholder="Your name" required>
+      <input id="cEmail" type="email" placeholder="Your email" required>
+      <textarea id="cMsg" rows="3" placeholder="Your message" required></textarea>
+      <button class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- STUDENT LOGIN / SIGNUP -->
+  <section id="student" class="view">
+    <div class="card form narrow">
+      <h2 id="stTitle">Student Login</h2>
+      <p class="muted">Only college email IDs containing <b>viva</b> are allowed.</p>
+      <form onsubmit="studentAuth(event)">
+        <input id="stName" placeholder="Full name" style="display:none">
+        <input id="stEmail" type="email" placeholder="you@viva.edu" required>
+        <input id="stPass" type="password" placeholder="Password" required>
+        <button class="btn" id="stBtn">Login</button>
+      </form>
+      <p class="muted center"><a href="#" id="stToggle" onclick="toggleSignup();return false">New student? Create account</a></p>
+    </div>
+  </section>
+
+  <!-- ADMIN LOGIN -->
+  <section id="admin" class="view">
+    <div class="card form narrow admin-card">
+      <h2>🛡️ Admin Login</h2>
+      <p class="muted">Authorized staff only.</p>
+      <form onsubmit="adminLogin(event)">
+        <input id="adEmail" type="email" placeholder="Admin email" required>
+        <input id="adPass" type="password" placeholder="Password" required>
+        <button class="btn alt">Login as Admin</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MY REGISTRATIONS -->
+  <section id="mine" class="view">
+    <h2 class="title">My Registrations</h2>
+    <div id="mineList" class="card"></div>
+  </section>
+
+  <!-- ADMIN DASHBOARD -->
+  <section id="dash" class="view">
+    <div class="row-between">
+      <h2 class="title">Admin Dashboard</h2>
+      <button class="btn small alt" onclick="downloadCsv()">⬇ Download CSV</button>
+    </div>
+    <div class="stats" id="stats"></div>
+
+    <div class="card">
+      <h3>Registrations per event</h3>
+      <div id="bars"></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-t="regs" onclick="tab('regs')">Registrations</button>
+      <button class="tab" data-t="studs" onclick="tab('studs')">Students</button>
+      <button class="tab" data-t="msgs" onclick="tab('msgs')">Messages</button>
+    </div>
+    <input id="search" class="search" placeholder="🔍 Search by name, email, event or department..." oninput="renderTab()">
+    <div class="card table-wrap" id="tabBody"></div>
+  </section>
+</main>
+
+<!-- REGISTER MODAL -->
+<div id="modal" class="modal">
+  <form class="card form" onsubmit="submitReg(event)">
+    <h2 id="mTitle">Register</h2>
+    <p class="muted" id="mWho"></p>
+    <input id="mPhone" placeholder="Phone number" required>
+    <input id="mDept" placeholder="Department (e.g. Computer Science)" required>
+    <div class="row-between">
+      <button type="button" class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn">Confirm</button>
+    </div>
+  </form>
+</div>
+
+<footer>© 2026 Campus Events • Built for students</footer>
+<script src="app.js"></script>
+</body>
+</html>
